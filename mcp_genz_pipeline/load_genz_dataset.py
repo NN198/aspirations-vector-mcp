@@ -1,3 +1,4 @@
+from __future__ import annotations
 
 """Utilities for loading a locally-downloaded Gen-Z dataset into the MCP server.
 
@@ -8,7 +9,6 @@ disk. It therefore focuses on discovering that file, emitting structured diagnos
 for connected MCP clients, and normalising the contents into the shared
 ``data/genz_career_aspirations.csv`` location for downstream tools.
 """
-from __future__ import annotations
 
 import csv
 import json
@@ -149,12 +149,11 @@ def load_genz_dataset(
     save_path:
         Optional override for the destination CSV path. Defaults to
         ``data/genz_career_aspirations.csv``.
+        Utility for retrieving the Gen-Z Career Aspirations dataset for the MCP server.
 
-"""Utility for retrieving the Gen-Z Career Aspirations dataset for the MCP server.
-
-This module is designed to be called from the MCP server's ``load_genz`` tool so
-that the server can reuse the shared implementation for downloading, cleaning,
-inspecting, and persisting the Kaggle dataset locally.
+        This module is designed to be called from the MCP server's ``load_genz`` tool so
+        that the server can reuse the shared implementation for downloading, cleaning,
+        inspecting, and persisting the Kaggle dataset locally.
 """
 from __future__ import annotations
 
@@ -163,7 +162,7 @@ from pathlib import Path
 from typing import Optional
 
 try:
-    import pandas as pd 
+    import pandas as pd #type: ignore[import]
 except ImportError as exc:  # pragma: no cover - handled at runtime when dependency missing
     raise SystemExit("pandas must be installed before running this script.") from exc
 
@@ -246,9 +245,6 @@ def load_genz_dataset(save_path: Optional[Path] = None) -> Path:
 if __name__ == "__main__":
     destination = load_genz_dataset()
     print(f"Dataset saved to {destination.resolve()}")
-
-        Path to the saved CSV file, which can be used by downstream MCP tools.
-    """
 
     api = KaggleApi()
     try:
