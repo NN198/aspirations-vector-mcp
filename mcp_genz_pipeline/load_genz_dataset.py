@@ -9,6 +9,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Optional
+import sys
+sys.path.append('/path/to/kagglehub')
 
 try:
     import pandas as pd
@@ -17,7 +19,7 @@ except ImportError as exc:  # pragma: no cover - handled at runtime when depende
 
 try:
     import kagglehub
-    from kagglehub.adapters import KaggleDatasetAdapter
+    from kagglehub.adapters import KaggleDatasetAdapter 
 except ImportError as exc:  # pragma: no cover - handled at runtime when dependency missing
     raise SystemExit(
         "kagglehub with the pandas extra must be installed before running this script."
